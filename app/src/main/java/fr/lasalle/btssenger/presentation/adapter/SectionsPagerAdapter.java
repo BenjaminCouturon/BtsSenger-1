@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import fr.lasalle.btssenger.FriendsFragment;
+
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
-    private static final String[] TITLES = {"CHATS", "FRIENDS", "REQUESTS", "USERS"};
+    private static final String[] TITLES = {"CHATS", "FRIENDS", "REQUESTS"};
 
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -17,6 +19,14 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
+            case 0 :
+                return new ChatsFragment();
+
+            case 1 :
+                return new FriendsFragment();
+
+            case 2 :
+                return new RequestFragment ();
             default:
                 return null;
         }
@@ -24,7 +34,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return 3;
     }
 
     @Nullable
