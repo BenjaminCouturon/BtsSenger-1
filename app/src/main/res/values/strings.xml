@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">BtsSenger</string>
+
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="fullname">Fullname</string>
+    <string name="save">Save</string>
+
+    <string name="menu_logout">Logout</string>
+    <string name="menu_account_setting">Account Settings</string>
+
+    <string name="login_title">Login</string>
+    <string name="login_button">Login</string>
+
+    <string name="register_title">Create a New Account</string>
+    <string name="register_button">Create Account</string>
+
+    <string name="edit_account">Edit account</string>
+</resources>

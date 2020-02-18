@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".presentation.AccountActivity">
+
+    <include layout="@layout/app_bar" android:id="@+id/account_toolbar"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/account_activity_avatar"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintTop_toBottomOf="@+id/account_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_user"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="1dp"/>
+
+    <ImageView
+        android:id="@+id/account_activity_avatar_change"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/account_activity_avatar"
+        app:layout_constraintEnd_toEndOf="@+id/account_activity_avatar"
+        android:background="@drawable/circle"
+        android:src="@drawable/ic_photo_camera_black_24dp"
+        android:tint="@color/colorPrimary"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/account_activity_fullname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/account_activity_avatar"
+        android:text="Display Name"
+        android:textSize="12pt"
+        android:textColor="@color/white"
+        android:inputType="textCapWords"/>
+
+    <EditText
+        android:id="@+id/account_activity_fullname_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/account_activity_avatar"
+        android:textColor="@color/white"
+        android:textAppearance="@style/LoginHintStyle"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/account_activity_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/account_activity_fullname"
+        android:text="Hi there, I'm using BtsSenger App"
+        android:textSize="8pt"
+        android:textColor="@color/white"
+        android:inputType="textCapSentences"/>
+
+    <EditText
+        android:id="@+id/account_activity_status_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/account_activity_fullname_edit"
+        android:textColor="@color/white"
+        android:textAppearance="@style/LoginHintStyle"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/account_activity_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:paddingStart="48dp"
+        android:paddingEnd="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/border_button"
+        android:text="@string/edit_account"
+        android:textAllCaps="true"
+        android:textSize="8pt"
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
