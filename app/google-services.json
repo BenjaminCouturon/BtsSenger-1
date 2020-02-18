@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "393091362411",
+    "firebase_url": "https://btssenger-818aa.firebaseio.com",
+    "project_id": "btssenger-818aa",
+    "storage_bucket": "btssenger-818aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393091362411:android:a5a17d41580765cf4a0b2e",
+        "android_client_info": {
+          "package_name": "fr.lasalle.btssenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "393091362411-hdbf6ti84l70i2dcc1fislnevhr5ua48.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.lasalle.btssenger",
+            "certificate_hash": "3dcad692702ee4d7501ff9591bc0cac9353452e4"
+          }
+        },
+        {
+          "client_id": "393091362411-8dsrgu34g13jfrahmd392fimuqpu5e3k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlo4H_TbwhxcE1A76BWcdvOa-iTBWLCTE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "393091362411-8dsrgu34g13jfrahmd392fimuqpu5e3k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
