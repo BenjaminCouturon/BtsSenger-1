@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import fr.lasalle.btssenger.ChatsFragment;
 import fr.lasalle.btssenger.FriendsFragment;
+import fr.lasalle.btssenger.RequestsFragment;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private static final String[] TITLES = {"CHATS", "FRIENDS", "REQUESTS"};
@@ -21,12 +23,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0 :
                 return new ChatsFragment();
-
             case 1 :
                 return new FriendsFragment();
 
             case 2 :
-                return new RequestFragment ();
+                return new RequestsFragment();
             default:
                 return null;
         }
