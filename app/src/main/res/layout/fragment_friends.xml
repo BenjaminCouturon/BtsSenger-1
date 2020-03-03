@@ -11,4 +11,11 @@
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/all_friends"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        />
+
+
 </FrameLayout>
