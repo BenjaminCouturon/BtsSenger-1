@@ -3,9 +3,11 @@ package fr.lasalle.btssenger.service;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import fr.lasalle.btssenger.R;
 import fr.lasalle.btssenger.entity.User;
+import fr.lasalle.btssenger.presentation.adapter.UserViewHolder;
 
 public class FriendsService {
     private FirebaseAuth auth;
@@ -45,24 +48,24 @@ public class FriendsService {
                 })
                 .build();
     }
-}
 
-    public FirebaseRecyclerAdapter<User, UserViewHolder> getFriends(final OnItemSelectedListener listener) {
+    public FirebaseRecyclerAdapter<User, UserViewHolder> getFriends() {
         return new FirebaseRecyclerAdapter<User, UserViewHolder>(optionsAllFriends) {
             @NonNull
             @Override
             public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.item_user, parent, false);
+                        .inflate(R.layout.item_friend, parent, false);
                 return new UserViewHolder(view);
             }
 
             @Override
             protected void onBindViewHolder(@NonNull UserViewHolder holder, int position, @NonNull User user) {
-                holder.setFullname(user.getFullname());
+                holder.setFullname(user.getName());
                 holder.setStatus(user.getStatus());
                 holder.setAvatar(user.getImage());
             }
         };
     }
+}
 
