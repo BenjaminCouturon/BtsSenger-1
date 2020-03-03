@@ -1,4 +1,4 @@
-package fr.lasalle.btssenger;
+package fr.lasalle.btssenger.presentation;
 
 import android.content.Context;
 import android.net.Uri;
@@ -15,8 +15,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+
 import java.util.Date;
 
+import fr.lasalle.btssenger.R;
 import fr.lasalle.btssenger.entity.User;
 import fr.lasalle.btssenger.presentation.adapter.UserViewHolder;
 import fr.lasalle.btssenger.service.FirebaseAdapter;
@@ -25,6 +28,8 @@ import fr.lasalle.btssenger.service.FriendsService;
 
 public class FriendsFragment extends Fragment {
     private FriendsService friendsService = new FriendsService();
+    private FirebaseRecyclerAdapter<User, UserViewHolder> adapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +50,8 @@ public class FriendsFragment extends Fragment {
         friends.setHasFixedSize(true);
         friends.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        FirebaseAdapter<User, UserViewHolder> adapter = new FirebaseAdapter<User, UserViewHolder>() {
+        adapter = friendsService.getFriends();
+        /*FirebaseAdapter<User, UserViewHolder> adapter = new FirebaseAdapter<User, UserViewHolder>() {
             @NonNull
             @Override
             public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -61,8 +67,18 @@ public class FriendsFragment extends Fragment {
 
 
             }
-        };
+        };*/
         friends.setAdapter(adapter);
-        friendsService.getFriends();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 }
