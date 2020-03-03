@@ -5,11 +5,12 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-
+import java.util.Date;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Date;
 
 
 public class FriendsFragment extends Fragment {
@@ -26,7 +27,18 @@ public class FriendsFragment extends Fragment {
 
     public FriendsFragment() {
         // Required empty public constructor
+        private String nom;
+        private String prenom;
+        private int datedenaissance;
+        private String mail;
+        private int telephone;
+
+        public FriendsFragment()
+
+        {
+
     }
+
 
     /**
      * Use this factory method to create a new instance of
