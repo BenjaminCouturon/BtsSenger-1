@@ -52,7 +52,7 @@ public class UsersService {
                 User user = new User();
                 if (dataSnapshot.child("name") != null && dataSnapshot.child("name").getValue() != null) {
                     String name = dataSnapshot.child("name").getValue().toString();
-                    user.setFullname(name);
+                    user.setName(name);
                 }
 
                 if (dataSnapshot.child("status") != null && dataSnapshot.child("status").getValue() != null) {
@@ -105,7 +105,7 @@ public class UsersService {
                     listener.onLoad(false);
                     if (dataSnapshot.child("name") != null && dataSnapshot.child("name").getValue() != null) {
                         String name = dataSnapshot.child("name").getValue().toString();
-                        user.setFullname(name);
+                        user.setName(name);
                     }
 
                     if (dataSnapshot.child("status") != null && dataSnapshot.child("status").getValue() != null) {

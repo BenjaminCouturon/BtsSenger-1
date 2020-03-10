@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import fr.lasalle.btssenger.ChatsFragment;
 import fr.lasalle.btssenger.presentation.FriendsFragment;
-import fr.lasalle.btssenger.RequestsFragment;
+import fr.lasalle.btssenger.presentation.RequestsFragment;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private static final String[] TITLES = {"CHATS", "FRIENDS", "REQUESTS"};

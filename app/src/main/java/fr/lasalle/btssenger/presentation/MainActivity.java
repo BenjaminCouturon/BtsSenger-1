@@ -14,6 +14,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import fr.lasalle.btssenger.R;
 import fr.lasalle.btssenger.presentation.adapter.SectionsPagerAdapter;
+import fr.lasalle.btssenger.service.AccountService;
 
 public class MainActivity extends AppCompatActivity {
     private AccountService accountService;
