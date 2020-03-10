@@ -19,6 +19,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import fr.lasalle.btssenger.entity.Account;
@@ -32,6 +33,10 @@ public class AccountService {
         auth = FirebaseAuth.getInstance();
         usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         imagesStorage = FirebaseStorage.getInstance().getReference().child("profile_images");
+    }
+
+    public String getCurrentAccountId() {
+        return auth.getUid();
     }
 
     public boolean isAuthenticate() {
@@ -73,10 +78,6 @@ public class AccountService {
             listener.onError();
         }
     }
-
-            /*{
-
-    }*/
 
     public void loginWithEmailAndPassword(String email, String password, final OnCompleteListener<Account> listener) {
         listener.onLoad(true);

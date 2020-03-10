@@ -13,8 +13,6 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import fr.lasalle.btssenger.R;
 import fr.lasalle.btssenger.entity.Account;
-import fr.lasalle.btssenger.service.AccountService;
-import fr.lasalle.btssenger.service.OnCompleteListener;
 
 public class RegisterActivity extends AppCompatActivity {
     private AccountService accountService;

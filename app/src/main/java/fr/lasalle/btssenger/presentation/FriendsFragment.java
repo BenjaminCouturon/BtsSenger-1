@@ -1,7 +1,5 @@
 package fr.lasalle.btssenger.presentation;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,20 +8,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Date;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
-import java.util.Date;
-
 import fr.lasalle.btssenger.R;
 import fr.lasalle.btssenger.entity.User;
 import fr.lasalle.btssenger.presentation.adapter.UserViewHolder;
-import fr.lasalle.btssenger.service.FirebaseAdapter;
-import fr.lasalle.btssenger.service.FriendsService;
 
 
 public class FriendsFragment extends Fragment {

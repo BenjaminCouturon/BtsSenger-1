@@ -22,8 +22,6 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import de.hdodenhof.circleimageview.CircleImageView;
 import fr.lasalle.btssenger.R;
 import fr.lasalle.btssenger.entity.Account;
-import fr.lasalle.btssenger.service.AccountService;
-import fr.lasalle.btssenger.service.OnCompleteListener;
 
 public class AccountActivity extends AppCompatActivity {
     private AccountService accountService;
