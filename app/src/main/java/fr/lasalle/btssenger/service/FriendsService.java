@@ -6,17 +6,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
+import com.firebase.ui.common.ChangeEventType;
+import com.firebase.ui.database.ChangeEventListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Calendar;
 
 import fr.lasalle.btssenger.R;
 import fr.lasalle.btssenger.entity.User;
@@ -36,68 +40,29 @@ public class FriendsService {
         friendsRef = FirebaseDatabase.getInstance().getReference().child("Friends");
         usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
-        usersRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                System.out.println("=====user: " + dataSnapshot.getKey());
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        friendsRef.child(auth.getUid()).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                System.out.println("=====my: " + dataSnapshot.getKey());
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
         optionsAllFriends = new FirebaseRecyclerOptions.Builder<User>()
                 .setIndexedQuery(friendsRef.child(auth.getUid()), usersRef, new SnapshotParser<User>() {
                     @NonNull
                     @Override
                     public User parseSnapshot(@NonNull DataSnapshot snapshot) {
-                        System.out.printf("===========friend:" + snapshot.getKey());
                         User user = new User();
                         user.setId(snapshot.getKey());
-                        user.setName(snapshot.child("name").getValue().toString());
+                        user.setFullname(snapshot.child("name").getValue().toString());
+                        user.setStatus(snapshot.child("status").getValue().toString());
+                        user.setImage(Uri.parse(snapshot.child("image").getValue().toString()));
+                        return user;
+                    }
+                })
+                .build();
+
+        optionsAllRequests = new FirebaseRecyclerOptions.Builder<User>()
+                .setIndexedQuery(friendRequestsRef.child(auth.getUid()), usersRef, new SnapshotParser<User>() {
+                    @NonNull
+                    @Override
+                    public User parseSnapshot(@NonNull DataSnapshot snapshot) {
+                        User user = new User();
+                        user.setId(snapshot.getKey());
+                        user.setFullname(snapshot.child("name").getValue().toString());
                         user.setStatus(snapshot.child("status").getValue().toString());
                         user.setImage(Uri.parse(snapshot.child("image").getValue().toString()));
                         return user;
@@ -106,23 +71,163 @@ public class FriendsService {
                 .build();
     }
 
-    public FirebaseRecyclerAdapter<User, UserViewHolder> getFriends() {
-        return new FirebaseRecyclerAdapter<User, UserViewHolder>(optionsAllFriends) {
-            @NonNull
+    public void inviteFriend(final String friendId, final OnCompleteListener<Boolean> listener) {
+        friendRequestsRef.child(auth.getUid()).child(friendId)
+                .child("requestType").setValue("sent")
+                .addOnCompleteListener(new com.google.android.gms.tasks.OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            friendRequestsRef.child(friendId).child(auth.getUid())
+                                    .child("requestType").setValue("received")
+                                    .addOnCompleteListener(new com.google.android.gms.tasks.OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                listener.onSuccess(true);
+                                            } else {
+                                                listener.onError();
+                                            }
+                                        }
+                                    });
+                        } else {
+                            listener.onError();
+                        }
+                    }
+                });
+    }
+
+    public void cancelFriendInvitation(final String friendId, final OnCompleteListener<Boolean> listener) {
+        friendRequestsRef.child(auth.getUid()).child(friendId).removeValue()
+                .addOnCompleteListener(new com.google.android.gms.tasks.OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            friendRequestsRef.child(friendId).child(auth.getUid()).removeValue()
+                                    .addOnCompleteListener(new com.google.android.gms.tasks.OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                listener.onSuccess(true);
+                                            } else {
+                                                listener.onError();
+                                            }
+                                        }
+                                    });
+                        } else {
+                            listener.onError();
+                        }
+                    }
+                });
+    }
+
+    public void acceptInvitation(final String friendId, final OnCompleteListener<Boolean> listener) {
+        final long currentDate = Calendar.getInstance().getTime().getTime();
+        friendsRef.child(auth.getUid()).child(friendId).setValue(currentDate)
+                .addOnCompleteListener(new com.google.android.gms.tasks.OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            friendsRef.child(friendId).child(auth.getUid()).setValue(currentDate)
+                                    .addOnCompleteListener(new com.google.android.gms.tasks.OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                cancelFriendInvitation(friendId, listener);
+                                            } else {
+                                                listener.onError();
+                                            }
+                                        }
+                                    });
+                        } else {
+                            listener.onError();
+                        }
+                    }
+                });
+    }
+
+    public void declineInvitation(final String friendId, final OnCompleteListener<Boolean> listener) {
+        cancelFriendInvitation(friendId, listener);
+    }
+
+    public void fetchUsers(final FirebaseAdapter adapter) {
+        optionsAllFriends.getSnapshots().addChangeEventListener(new ChangeEventListener() {
             @Override
-            public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.item_friend, parent, false);
-                return new UserViewHolder(view);
+            public void onChildChanged(@NonNull ChangeEventType type, @NonNull DataSnapshot snapshot, int newIndex, int oldIndex) {
+                if (type == ChangeEventType.ADDED) {
+                    adapter.addEntity(optionsAllFriends.getSnapshots().get(newIndex));
+                }
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull UserViewHolder holder, int position, @NonNull User user) {
-                holder.setFullname(user.getName());
-                holder.setStatus(user.getStatus());
-                holder.setAvatar(user.getImage());
+            public void onDataChanged() {
+
             }
-        };
+
+            @Override
+            public void onError(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void fetchFriendRequests(final FirebaseAdapter adapter) {
+        optionsAllRequests.getSnapshots().addChangeEventListener(new ChangeEventListener() {
+            @Override
+            public void onChildChanged(@NonNull ChangeEventType type, @NonNull DataSnapshot snapshot, int newIndex, int oldIndex) {
+                if (type == ChangeEventType.ADDED) {
+                    adapter.addEntity(optionsAllRequests.getSnapshots().get(newIndex));
+                }
+            }
+
+            @Override
+            public void onDataChanged() {
+
+            }
+
+            @Override
+            public void onError(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void getFriendRequestType(final String friendId, final OnCompleteListener<RequestType> listener) {
+        friendRequestsRef.child(auth.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.hasChild(friendId)) {
+                            String requestType = dataSnapshot.child(friendId).child("requestType").getValue().toString();
+                            if (requestType.equalsIgnoreCase("sent")) {
+                                listener.onSuccess(RequestType.INVITE_SENT);
+                            } else if (requestType.equalsIgnoreCase("received")) {
+                                listener.onSuccess(RequestType.INVITE_RECEIVED);
+                            }
+                        } else {
+                            friendsRef.child(auth.getUid())
+                                    .addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            if (dataSnapshot.hasChild(friendId)) {
+                                                listener.onSuccess(RequestType.FRIEND);
+                                            } else {
+                                                listener.onSuccess(RequestType.NOT_FRIEND);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                            listener.onError();
+                                        }
+                                    });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        listener.onError();
+                    }
+                });
     }
 }
-

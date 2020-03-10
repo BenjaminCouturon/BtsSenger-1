@@ -7,8 +7,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class FirebaseAdapter<E, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
-    protected List<E> entities;
+public abstract class FirebaseAdapter<T, VH extends RecyclerView.ViewHolder>
+        extends RecyclerView.Adapter<VH> {
+    protected List<T> entities;
 
     public FirebaseAdapter() {
         super();
@@ -21,7 +22,7 @@ public abstract class FirebaseAdapter<E, VH extends RecyclerView.ViewHolder> ext
         return entities.size();
     }
 
-    public void addEntity(E entity) {
+    public void addEntity(T entity) {
         entities.add(entity);
         notifyDataSetChanged();
     }
