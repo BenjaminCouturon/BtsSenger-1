@@ -42,18 +42,18 @@ public class ChatsFragment extends Fragment {
         chats.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
-        FirebaseAdapter<Message, MessageViewHolder> adapter = new FirebaseAdapter<Message, MessageViewHolder>() {
+        FirebaseAdapter<User, UserViewHolder> adapter = new FirebaseAdapter<User, UserViewHolder>() {
             @NonNull
             @Override
-            public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat, parent, false);
-                return new MessageViewHolder(view);
+            public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_friend, parent, false);
+                return new UserViewHolder(view);
             }
 
             @Override
-            public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
-                holder.setMessage(entities.get(position).getMessage());
-
+            public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
+                holder.setAvatar(entities.get(position).getImage());
+                holder.setFullname(entities.get(position).getName());
 
             }
         };

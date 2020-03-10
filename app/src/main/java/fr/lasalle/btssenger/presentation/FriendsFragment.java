@@ -56,7 +56,7 @@ public class FriendsFragment extends Fragment {
             }
 
             @Override
-            public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
+            public void onBindViewHolder(@NonNull UserViewHolder holder, final int position) {
                 holder.setFullname(entities.get(position).getName());
                 holder.setStatus(entities.get(position).getStatus());
                 holder.setAvatar(entities.get(position).getImage());
@@ -64,6 +64,7 @@ public class FriendsFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getActivity(), FriendProfil.class);
+                        intent.putExtra("PROFIL_ID", entities.get(position).getId());
                         startActivity(intent);
                         System.out.println("Yo !");
                     }
