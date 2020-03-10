@@ -13,6 +13,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import fr.lasalle.btssenger.R;
 import fr.lasalle.btssenger.entity.Account;
+import fr.lasalle.btssenger.service.AccountService;
+import fr.lasalle.btssenger.service.OnCompleteListener;
 
 public class RegisterActivity extends AppCompatActivity {
     private AccountService accountService;
@@ -42,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = passwordLayout.getEditText().getText().toString();
                 String fullname = fullnameLayout.getEditText().getText().toString();
                 if (!TextUtils.isEmpty(fullname) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-                    accountService.createNewAccount(fullname, email, password, new OnCompleteListener<Account>() {
+                    accountService.createNewAccount(fullname, email, password, new OnCompleteListener<Account>(){
                         @Override
                         public void onSuccess(Account result) {
                             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);

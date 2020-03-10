@@ -1,6 +1,7 @@
 package fr.lasalle.btssenger.entity;
 
 public class Message {
+    private String author;
     private String message;
     private MessageType type;
     private long time;
@@ -39,6 +40,14 @@ public class Message {
 
     public void setSeen(boolean seen) {
         this.seen = seen;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public enum MessageType {

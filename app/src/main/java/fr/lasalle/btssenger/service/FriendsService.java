@@ -47,7 +47,7 @@ public class FriendsService {
                     public User parseSnapshot(@NonNull DataSnapshot snapshot) {
                         User user = new User();
                         user.setId(snapshot.getKey());
-                        user.setFullname(snapshot.child("name").getValue().toString());
+                        user.setName(snapshot.child("name").getValue().toString());
                         user.setStatus(snapshot.child("status").getValue().toString());
                         user.setImage(Uri.parse(snapshot.child("image").getValue().toString()));
                         return user;
@@ -62,7 +62,7 @@ public class FriendsService {
                     public User parseSnapshot(@NonNull DataSnapshot snapshot) {
                         User user = new User();
                         user.setId(snapshot.getKey());
-                        user.setFullname(snapshot.child("name").getValue().toString());
+                        user.setName(snapshot.child("name").getValue().toString());
                         user.setStatus(snapshot.child("status").getValue().toString());
                         user.setImage(Uri.parse(snapshot.child("image").getValue().toString()));
                         return user;
