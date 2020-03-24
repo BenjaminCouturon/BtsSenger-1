@@ -1,18 +1,12 @@
 package fr.lasalle.btssenger.service;
 
 import android.net.Uri;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.common.ChangeEventType;
 import com.firebase.ui.database.ChangeEventListener;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,11 +20,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import fr.lasalle.btssenger.R;
 import fr.lasalle.btssenger.entity.Message;
 import fr.lasalle.btssenger.entity.User;
-import fr.lasalle.btssenger.presentation.adapter.MessageViewHolder;
-import fr.lasalle.btssenger.presentation.adapter.UserViewHolder;
 
 public class ChatService {
     private FirebaseAuth auth;

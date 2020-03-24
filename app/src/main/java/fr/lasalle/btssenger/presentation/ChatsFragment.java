@@ -12,12 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import javax.security.auth.callback.CallbackHandler;
-
 import fr.lasalle.btssenger.R;
-import fr.lasalle.btssenger.entity.Message;
 import fr.lasalle.btssenger.entity.User;
-import fr.lasalle.btssenger.presentation.adapter.MessageViewHolder;
 import fr.lasalle.btssenger.presentation.adapter.UserViewHolder;
 import fr.lasalle.btssenger.service.ChatService;
 import fr.lasalle.btssenger.service.FirebaseAdapter;
