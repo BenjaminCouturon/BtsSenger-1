@@ -1,5 +1,6 @@
 package fr.lasalle.btssenger.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -51,6 +52,15 @@ public class RequestsFragment extends Fragment {
                 holder.setFullname(entities.get(position).getName());
                 holder.setStatus(entities.get(position).getStatus());
                 holder.setAvatar(entities.get(position).getImage());
+                holder.onClickRequest(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), RequestProfil.class);
+                        intent.putExtra("PROFIL_ID", entities.get(position).getId());
+                        startActivity(intent);
+                        System.out.println("Yo !");
+                    }
+                });
             }
         };
 
