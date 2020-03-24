@@ -36,6 +36,6 @@ public class UserViewHolder extends RecyclerView.ViewHolder{
         view.findViewById(R.id.item_friend_invit).setOnClickListener(listener);
     }
     public void onClickRequest(View.OnClickListener listener) {
-        view.findViewById(R.id.item_friend_invit).setOnClickListener(listener
+        view.findViewById(R.id.content).setOnClickListener(listener);
     }
 }
