@@ -1,6 +1,5 @@
 package fr.lasalle.btssenger.presentation;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,38 +12,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import javax.security.auth.callback.CallbackHandler;
 
 import fr.lasalle.btssenger.R;
+import fr.lasalle.btssenger.entity.Message;
 import fr.lasalle.btssenger.entity.User;
+import fr.lasalle.btssenger.presentation.adapter.MessageViewHolder;
 import fr.lasalle.btssenger.presentation.adapter.UserViewHolder;
+import fr.lasalle.btssenger.service.ChatService;
 import fr.lasalle.btssenger.service.FirebaseAdapter;
-import fr.lasalle.btssenger.service.UsersService;
 
 
-public class FriendsFragment extends Fragment {
-    private UsersService usersService = new UsersService();
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+public class ChatsFragment extends Fragment {
+    private ChatService chatService = new ChatService();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_friends, container, false);
+        return inflater.inflate(R.layout.fragment_chats, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RecyclerView friends = view.findViewById(R.id.all_friends);
-        friends.setHasFixedSize(true);
-        friends.setLayoutManager(new LinearLayoutManager(getContext()));
+        RecyclerView chats = view.findViewById(R.id.chats_fragment_chats);
+        chats.setHasFixedSize(true);
+        chats.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
         FirebaseAdapter<User, UserViewHolder> adapter = new FirebaseAdapter<User, UserViewHolder>() {
@@ -56,26 +51,13 @@ public class FriendsFragment extends Fragment {
             }
 
             @Override
-            public void onBindViewHolder(@NonNull UserViewHolder holder, final int position) {
-                holder.setFullname(entities.get(position).getName());
-                holder.setStatus(entities.get(position).getStatus());
+            public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
                 holder.setAvatar(entities.get(position).getImage());
-                holder.onClickInvit(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getActivity(), FriendProfil.class);
-                        intent.putExtra("PROFIL_ID", entities.get(position).getId());
-                        startActivity(intent);
-                        System.out.println("Yo !");
-                    }
-                });
-
+                holder.setFullname(entities.get(position).getName());
 
             }
         };
-        friends.setAdapter(adapter);
-        usersService.fetchUsers(adapter);
+        chats.setAdapter(adapter);
+        chatService.fetchChats(adapter);
     }
-
-
 }
