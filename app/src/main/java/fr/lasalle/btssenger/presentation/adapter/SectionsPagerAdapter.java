@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import fr.lasalle.btssenger.ChatsFragment;
+import fr.lasalle.btssenger.presentation.ChatsFragment;
 import fr.lasalle.btssenger.presentation.FriendsFragment;
 import fr.lasalle.btssenger.presentation.RequestsFragment;
 
