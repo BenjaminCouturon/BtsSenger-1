@@ -1,5 +1,6 @@
 package fr.lasalle.btssenger.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -50,7 +51,14 @@ public class ChatsFragment extends Fragment {
             public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
                 holder.setAvatar(entities.get(position).getImage());
                 holder.setFullname(entities.get(position).getName());
-
+                holder.onClickRequest(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(),TchatActivity.class);
+                        intent.putExtra("tchat_id", "");
+                        startActivity(intent);
+                    }
+                });
             }
         };
         chats.setAdapter(adapter);
