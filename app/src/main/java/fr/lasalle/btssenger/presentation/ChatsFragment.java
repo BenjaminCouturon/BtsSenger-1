@@ -55,10 +55,10 @@ public class ChatsFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getActivity(),TchatActivity.class);
-                        intent.putExtra("tchat_id",null);
+                        intent.putExtra("tchat_id", "");
                         startActivity(intent);
                     }
-                };
+                });
             }
         };
         chats.setAdapter(adapter);
