@@ -57,8 +57,8 @@ public class ChatsFragment extends Fragment {
                         Intent intent = new Intent(getActivity(),TchatActivity.class);
                         intent.putExtra("tchat_id","");
                         startActivity(intent);
-                    }
-                };
+                        )}
+                });
             }
         };
         chats.setAdapter(adapter);
