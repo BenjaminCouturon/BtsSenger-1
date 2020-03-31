@@ -25,7 +25,8 @@ public class FriendProfil extends AppCompatActivity {
         findViewById(R.id.tchat).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FriendProfil.this,)
+                Intent intent = new Intent(FriendProfil.this,TchatActivity.class);
+                startActivity(intent);
             }
         });
 
