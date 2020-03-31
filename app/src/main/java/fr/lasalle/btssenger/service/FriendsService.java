@@ -71,6 +71,20 @@ public class FriendsService {
                 .build();
     }
 
+    public void removeFriend(final String friendId, final OnCompleteListener<Boolean> listener) {
+        friendsRef.child(auth.getUid()).child(friendId).removeValue().addOnCompleteListener(new com.google.android.gms.tasks.OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    listener.onSuccess(true);
+                } else {
+                    listener.onError();
+                }
+            }
+        });
+    }
+
+
     public void inviteFriend(final String friendId, final OnCompleteListener<Boolean> listener) {
         friendRequestsRef.child(auth.getUid()).child(friendId)
                 .child("requestType").setValue("sent")
@@ -146,9 +160,6 @@ public class FriendsService {
                 });
     }
 
-    public void declineInvitation(final String friendId, final OnCompleteListener<Boolean> listener) {
-        cancelFriendInvitation(friendId, listener);
-    }
 
     public void fetchUsers(final FirebaseAdapter adapter) {
         optionsAllFriends.getSnapshots().addChangeEventListener(new ChangeEventListener() {
