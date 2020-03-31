@@ -9,8 +9,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/account_activity_avatar"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
+        android:layout_width="175dp"
+        android:layout_height="224dp"
         android:layout_marginTop="48dp"
         android:src="@drawable/ic_user"
         app:civ_border_color="@color/white"
@@ -25,15 +25,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="92dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/account_activity_avatar"
-        android:layout_marginLeft="12dp"
+        android:inputType="textCapWords"
         android:text="Display Name"
-        android:textSize="12pt"
         android:textColor="@color/white"
-        android:inputType="textCapWords"/>
+        android:textSize="12pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/account_activity_avatar" />
+
+    <Button
+        android:id="@+id/button"
+        android:text="Accepter"
+        android:background="@color/green"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="57dp"
+        tools:layout_editor_absoluteY="471dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:background="@color/red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refuser"
+        tools:layout_editor_absoluteX="265dp"
+        tools:layout_editor_absoluteY="471dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
