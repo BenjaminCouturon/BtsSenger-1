@@ -6,26 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".presentation.TchatActivity">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/List_message"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:background="@color/full_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="64dp"/>
 
     <EditText
         android:id="@+id/Name_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
         android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="670dp" />
+        android:background="@color/grey"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Send_message"
+        app:layout_constraintTop_toBottomOf="@+id/List_message"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <Button
         android:id="@+id/Send_message"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="277dp"
-        tools:layout_editor_absoluteY="670dp" />
+        android:layout_height="48dp"
+        android:text="Envoyer"
+        android:background="@color/blue"
+        android:textColor="@color/full_white"
+        android:layout_marginLeft="4dp"
+        app:layout_constraintStart_toEndOf="@id/Name_message"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/List_message"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
