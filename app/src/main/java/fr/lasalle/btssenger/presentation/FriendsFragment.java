@@ -19,11 +19,12 @@ import fr.lasalle.btssenger.R;
 import fr.lasalle.btssenger.entity.User;
 import fr.lasalle.btssenger.presentation.adapter.UserViewHolder;
 import fr.lasalle.btssenger.service.FirebaseAdapter;
+import fr.lasalle.btssenger.service.FriendsService;
 import fr.lasalle.btssenger.service.UsersService;
 
 
 public class FriendsFragment extends Fragment {
-    private UsersService usersService = new UsersService();
+    private FriendsService friendsService = new FriendsService();
 
 
     @Override
@@ -60,7 +61,7 @@ public class FriendsFragment extends Fragment {
                 holder.setFullname(entities.get(position).getName());
                 holder.setStatus(entities.get(position).getStatus());
                 holder.setAvatar(entities.get(position).getImage());
-                holder.onClickInvit(new View.OnClickListener() {
+                holder.onClickRequest(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getActivity(), FriendProfil.class);
@@ -74,7 +75,7 @@ public class FriendsFragment extends Fragment {
             }
         };
         friends.setAdapter(adapter);
-        usersService.fetchUsers(adapter);
+        friendsService.fetchUsers(adapter);
     }
 
 
