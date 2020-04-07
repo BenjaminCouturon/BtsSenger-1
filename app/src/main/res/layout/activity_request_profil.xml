@@ -35,5 +35,21 @@
         android:textSize="12pt"
         android:textColor="@color/white"
         android:inputType="textCapWords"/>
+
+    <Button
+        android:id="@+id/decline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="REFUSER"
+        tools:layout_editor_absoluteX="219dp"
+        tools:layout_editor_absoluteY="632dp" />
+
+    <Button
+        android:id="@+id/accepte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ACCEPTER"
+        tools:layout_editor_absoluteX="106dp"
+        tools:layout_editor_absoluteY="632dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
