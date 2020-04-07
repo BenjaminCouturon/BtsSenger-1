@@ -76,7 +76,6 @@ public class FriendsFragment extends Fragment {
         };
         friends.setAdapter(adapter);
         friendsService.fetchUsers(adapter);
-    }
-
+  }
 
 }
