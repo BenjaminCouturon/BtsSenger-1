@@ -32,9 +32,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder{
         CircleImageView avatar = view.findViewById(R.id.item_friend_avatar);
         Picasso.get().load(uri).placeholder(R.drawable.ic_user).into(avatar);
     }
-    public void onClickInvit(View.OnClickListener listener) {
-        view.findViewById(R.id.item_friend_invit).setOnClickListener(listener);
-    }
+
     public void onClickRequest(View.OnClickListener listener) {
         view.findViewById(R.id.content).setOnClickListener(listener);
     }

@@ -40,7 +40,7 @@ public class FriendProfil extends AppCompatActivity {
                 friendService.removeFriend(profileId, new OnCompleteListener<Boolean>() {
                     @Override
                     public void onSuccess(Boolean result) {
-                        
+
                     }
 
                     @Override
