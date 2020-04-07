@@ -48,17 +48,17 @@ public class ChatsFragment extends Fragment {
             }
 
             @Override
-            public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
+            public void onBindViewHolder(@NonNull UserViewHolder holder, final int position) {
                 holder.setAvatar(entities.get(position).getImage());
                 holder.setFullname(entities.get(position).getName());
                 holder.onClickRequest(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getActivity(),TchatActivity.class);
-                        intent.putExtra("tchat_id", "");
+                        intent.putExtra("friendId", entities.get(position).getId());
                         startActivity(intent);
                     }
-                });
+                    });
             }
         };
         chats.setAdapter(adapter);

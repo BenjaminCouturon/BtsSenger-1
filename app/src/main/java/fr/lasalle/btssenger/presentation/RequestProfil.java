@@ -1,6 +1,7 @@
 package fr.lasalle.btssenger.presentation;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,11 +11,13 @@ import com.squareup.picasso.Picasso;
 
 import fr.lasalle.btssenger.R;
 import fr.lasalle.btssenger.entity.User;
+import fr.lasalle.btssenger.service.FriendsService;
 import fr.lasalle.btssenger.service.OnCompleteListener;
 import fr.lasalle.btssenger.service.UsersService;
 
 public class RequestProfil extends AppCompatActivity {
     private  UsersService usersService = new UsersService();
+    private  FriendsService friendservice = new FriendsService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,5 +44,50 @@ public class RequestProfil extends AppCompatActivity {
 
             }
         });
-    }
+        findViewById(R.id.decline).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String profileId = getIntent().getStringExtra("PROFIL_ID");
+                friendservice.acceptInvitation(profileId, new OnCompleteListener<Boolean>() {
+                    @Override
+                    public void onSuccess(Boolean result) {
+
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+
+                    @Override
+                    public void onLoad(boolean loading) {
+
+
+                    }
+
+                });
+            }
+        });
+        findViewById(R.id.accepte).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String profileId = getIntent().getStringExtra("PROFIL_ID");
+                friendservice.acceptInvitation(profileId, new OnCompleteListener<Boolean>() {
+                    @Override
+                    public void onSuccess(Boolean result) {
+
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+
+                    @Override
+                    public void onLoad(boolean loading) {
+                    }
+                });
+            }
+        });
+    };
 }

@@ -12,5 +12,7 @@ public class TchatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tchat);
+
+        String friendId = getIntent().getStringExtra("friendId");
     }
 }
