@@ -40,7 +40,7 @@
         android:id="@+id/tchat"
         android:layout_width="95dp"
         android:layout_height="53dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="84dp"
         android:background="@color/white"
         android:text="Tchat"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,16 +49,29 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/removefriend"
+    android:id="@+id/removefriend"
+    android:layout_width="143dp"
+    android:layout_height="54dp"
+    android:layout_marginTop="180dp"
+    android:background="@color/pink"
+    android:text="Supprimer contact"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tchat"
+    tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/invitfriend"
         android:layout_width="143dp"
         android:layout_height="54dp"
-        android:layout_marginTop="56dp"
-        android:background="@color/pink"
-        android:text="Supprimer contact"
+        android:layout_marginTop="84dp"
+        android:background="@color/green"
+        android:text="inviter contact"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tchat"
-        tools:ignore="MissingConstraints" />/>
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

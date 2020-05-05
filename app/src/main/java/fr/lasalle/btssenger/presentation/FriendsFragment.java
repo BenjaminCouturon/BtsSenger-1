@@ -76,6 +76,13 @@ public class FriendsFragment extends Fragment {
         };
         friends.setAdapter(adapter);
         friendsService.fetchUsers(adapter);
+        view.findViewById(R.id.add_friend).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AllUsersActivity.class);
+                startActivity(intent);
+            }
+        });
   }
 
 }
