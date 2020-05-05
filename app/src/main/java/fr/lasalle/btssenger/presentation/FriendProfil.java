@@ -54,10 +54,31 @@ public class FriendProfil extends AppCompatActivity {
                     }
                 });
 
+
             }
         });
 
+        findViewById(R.id.invitfriend).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                friendService.inviteFriend(profileId, new OnCompleteListener<Boolean>() {
+                    @Override
+                    public void onSuccess(Boolean result) {
 
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+
+                    @Override
+                    public void onLoad(boolean loading) {
+
+                    }
+                });
+            }
+        });
 
         usersService.loadUserProfile(profileId, new OnCompleteListener<User>() {
             @Override
