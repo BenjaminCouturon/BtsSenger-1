@@ -25,7 +25,7 @@ public class AllUsersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_users);
 
-        RecyclerView Users = findViewById(R.id.all_friends);
+        RecyclerView Users = findViewById(R.id.all_users_activity_users);
         Users.setHasFixedSize(true);
         Users.setLayoutManager(new LinearLayoutManager((this)));
 
