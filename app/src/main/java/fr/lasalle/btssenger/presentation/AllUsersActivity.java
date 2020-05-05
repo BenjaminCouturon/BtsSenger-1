@@ -58,13 +58,7 @@ public class AllUsersActivity extends AppCompatActivity {
         };
         Users.setAdapter(adapter);
         usersService.fetchUsers(adapter);
-        findViewById(R.id.add_friend).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AllUsersActivity.this, AllUsersActivity.class);
-                startActivity(intent);
-            }
-        });
+
     }
 }
 
