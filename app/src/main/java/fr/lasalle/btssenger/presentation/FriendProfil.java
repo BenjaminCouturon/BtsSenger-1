@@ -29,6 +29,7 @@ public class FriendProfil extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(FriendProfil.this,TchatActivity.class);
+                intent.putExtra("friendId", profileId);
                 startActivity(intent);
             }
         });
