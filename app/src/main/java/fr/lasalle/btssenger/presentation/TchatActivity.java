@@ -1,14 +1,22 @@
 package fr.lasalle.btssenger.presentation;
 
-        import androidx.appcompat.app.AppCompatActivity;
-
         import android.os.Bundle;
-        import android.view.View;
-        import android.widget.TextView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
-        import fr.lasalle.btssenger.R;
-        import fr.lasalle.btssenger.service.ChatService;
-        import fr.lasalle.btssenger.service.OnCompleteListener;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import fr.lasalle.btssenger.R;
+import fr.lasalle.btssenger.entity.Message;
+import fr.lasalle.btssenger.presentation.adapter.MessageViewHolder;
+import fr.lasalle.btssenger.service.ChatService;
+import fr.lasalle.btssenger.service.FirebaseAdapter;
+import fr.lasalle.btssenger.service.OnCompleteListener;
 
 public class TchatActivity extends AppCompatActivity {
     private ChatService chatService = new ChatService();
@@ -41,5 +49,25 @@ public class TchatActivity extends AppCompatActivity {
                 });
             }
         });
+
+        RecyclerView messages = findViewById(R.id.List_message);
+        messages.setHasFixedSize(true);
+        messages.setLayoutManager(new LinearLayoutManager((this)));
+        FirebaseAdapter<Message, MessageViewHolder> adapter = new FirebaseAdapter<Message, MessageViewHolder>() {
+            @NonNull
+            @Override
+            public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message, parent, false);
+                return new MessageViewHolder(view);
+            }
+
+            @Override
+            public void onBindViewHolder(@NonNull MessageViewHolder holder, final int position) {
+                holder.setMessage(entities.get(position).getMessage());
+
+            }
+        };
+        messages.setAdapter(adapter);
+        chatService.fetchMessages(friendId, adapter);
     }
 }
