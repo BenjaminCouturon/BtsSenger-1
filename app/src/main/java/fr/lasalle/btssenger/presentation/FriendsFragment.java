@@ -2,6 +2,9 @@ package fr.lasalle.btssenger.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,21 +12,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-
 import fr.lasalle.btssenger.R;
 import fr.lasalle.btssenger.entity.User;
 import fr.lasalle.btssenger.presentation.adapter.UserViewHolder;
 import fr.lasalle.btssenger.service.FirebaseAdapter;
 import fr.lasalle.btssenger.service.FriendsService;
-import fr.lasalle.btssenger.service.UsersService;
 
 
 public class FriendsFragment extends Fragment {
+    private static final int REQUEST_CODE = 1;
+
+    private FirebaseAdapter<User, UserViewHolder> adapter;
     private FriendsService friendsService = new FriendsService();
 
 
@@ -40,6 +39,15 @@ public class FriendsFragment extends Fragment {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE && resultCode == 1) {
+            friendsService.fetchUsers(adapter);
+        }
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -48,7 +56,7 @@ public class FriendsFragment extends Fragment {
         friends.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
-        FirebaseAdapter<User, UserViewHolder> adapter = new FirebaseAdapter<User, UserViewHolder>() {
+        adapter = new FirebaseAdapter<User, UserViewHolder>() {
             @NonNull
             @Override
             public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -66,7 +74,7 @@ public class FriendsFragment extends Fragment {
                     public void onClick(View v) {
                         Intent intent = new Intent(getActivity(), FriendProfil.class);
                         intent.putExtra("PROFIL_ID", entities.get(position).getId());
-                        startActivity(intent);
+                        startActivityForResult(intent, REQUEST_CODE);
                         System.out.println("Yo !");
                     }
                 });

@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import fr.lasalle.btssenger.R;
+import fr.lasalle.btssenger.entity.Message;
 
 
 public class MessageViewHolder extends RecyclerView.ViewHolder{
@@ -16,7 +17,14 @@ public class MessageViewHolder extends RecyclerView.ViewHolder{
         super(itemView);
         this.view = itemView;
     }
-    public void setMessage(String message) {
-        ((TextView) view.findViewById(R.id.item_message_text)).setText(message);
+    public void setMessage(String accountId, Message message) {
+        if (message.getAuthor().equals(accountId)) {
+            view.findViewById(R.id.item_message_receipt).setVisibility(View.GONE);
+            ((TextView) view.findViewById(R.id.item_message_sender)).setText(message.getMessage());
+        } else {
+            view.findViewById(R.id.item_message_sender).setVisibility(View.GONE);
+            ((TextView) view.findViewById(R.id.item_message_receipt)).setText(message.getMessage());
+        }
+
     }
 }

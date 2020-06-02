@@ -8,13 +8,35 @@
     android:background="@color/full_white">
 
     <TextView
-        android:id="@+id/item_message_text"
-        android:layout_width="66dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="36dp"
+        android:id="@+id/item_message_sender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:text="Fullname"
-        app:layout_constraintStart_toEndOf="@+id/item_friend_avatar"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/message_text_background2"
+        android:textColor="@color/full_white"/>
+
+    <TextView
+        android:id="@+id/item_message_receipt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="Fullname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/message_text_background"
+        android:textColor="@color/full_white"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

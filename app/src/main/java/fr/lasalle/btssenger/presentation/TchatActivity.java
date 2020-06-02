@@ -14,12 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import fr.lasalle.btssenger.R;
 import fr.lasalle.btssenger.entity.Message;
 import fr.lasalle.btssenger.presentation.adapter.MessageViewHolder;
-import fr.lasalle.btssenger.service.ChatService;
+        import fr.lasalle.btssenger.service.AccountService;
+        import fr.lasalle.btssenger.service.ChatService;
 import fr.lasalle.btssenger.service.FirebaseAdapter;
 import fr.lasalle.btssenger.service.OnCompleteListener;
 
 public class TchatActivity extends AppCompatActivity {
     private ChatService chatService = new ChatService();
+    private AccountService accountService = new AccountService();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +66,7 @@ public class TchatActivity extends AppCompatActivity {
 
             @Override
             public void onBindViewHolder(@NonNull MessageViewHolder holder, final int position) {
-                holder.setMessage(entities.get(position).getMessage());
+                holder.setMessage(accountService.getCurrentAccountId(), entities.get(position));
 
             }
         };

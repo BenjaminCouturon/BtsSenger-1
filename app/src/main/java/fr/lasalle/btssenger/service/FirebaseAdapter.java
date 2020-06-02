@@ -2,8 +2,6 @@ package fr.lasalle.btssenger.service;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +22,11 @@ public abstract class FirebaseAdapter<T, VH extends RecyclerView.ViewHolder>
 
     public void addEntity(T entity) {
         entities.add(entity);
+        notifyDataSetChanged();
+    }
+
+    public void removeEntity(T entity) {
+        entities.remove(entity);
         notifyDataSetChanged();
     }
 }

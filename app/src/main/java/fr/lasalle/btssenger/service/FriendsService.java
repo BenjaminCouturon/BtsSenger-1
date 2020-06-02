@@ -1,15 +1,11 @@
 package fr.lasalle.btssenger.service;
 
 import android.net.Uri;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
 import com.firebase.ui.common.ChangeEventType;
 import com.firebase.ui.database.ChangeEventListener;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
 import com.google.android.gms.tasks.Task;
@@ -22,9 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
-import fr.lasalle.btssenger.R;
 import fr.lasalle.btssenger.entity.User;
-import fr.lasalle.btssenger.presentation.adapter.UserViewHolder;
 
 public class FriendsService {
     private FirebaseAuth auth;
@@ -167,6 +161,8 @@ public class FriendsService {
             public void onChildChanged(@NonNull ChangeEventType type, @NonNull DataSnapshot snapshot, int newIndex, int oldIndex) {
                 if (type == ChangeEventType.ADDED) {
                     adapter.addEntity(optionsAllFriends.getSnapshots().get(newIndex));
+                } else if (type == ChangeEventType.REMOVED) {
+                    adapter.removeEntity(optionsAllFriends.getSnapshots().get(oldIndex));
                 }
             }
 

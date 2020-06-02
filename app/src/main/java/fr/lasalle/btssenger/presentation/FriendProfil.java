@@ -1,12 +1,12 @@
 package fr.lasalle.btssenger.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
 
@@ -14,6 +14,7 @@ import fr.lasalle.btssenger.R;
 import fr.lasalle.btssenger.entity.User;
 import fr.lasalle.btssenger.service.FriendsService;
 import fr.lasalle.btssenger.service.OnCompleteListener;
+import fr.lasalle.btssenger.service.RequestType;
 import fr.lasalle.btssenger.service.UsersService;
 
 public class FriendProfil extends AppCompatActivity {
@@ -41,12 +42,14 @@ public class FriendProfil extends AppCompatActivity {
                 friendService.removeFriend(profileId, new OnCompleteListener<Boolean>() {
                     @Override
                     public void onSuccess(Boolean result) {
-
+                        setResult(1);
+                        finish();
                     }
 
                     @Override
                     public void onError() {
-
+                        setResult(2);
+                        finish();
                     }
 
                     @Override
@@ -88,6 +91,39 @@ public class FriendProfil extends AppCompatActivity {
                 Picasso.get().load(result.getImage()).placeholder(R.drawable.ic_user).into((ImageView)findViewById(R.id.account_activity_avatar));
             }
 
+
+            @Override
+            public void onError() {
+
+            }
+
+            @Override
+            public void onLoad(boolean loading) {
+
+            }
+        });
+
+        friendService.getFriendRequestType(profileId, new OnCompleteListener<RequestType>() {
+            @Override
+            public void onSuccess(RequestType result) {
+                switch (result) {
+                    case FRIEND:
+                        findViewById(R.id.invitfriend).setVisibility(View.GONE);
+                        break;
+
+                    case NOT_FRIEND:
+                        findViewById(R.id.tchat).setVisibility(View.GONE);
+                        findViewById(R.id.removefriend).setVisibility(View.GONE);
+                        break;
+
+                    case INVITE_SENT:
+                    case INVITE_RECEIVED:
+                        findViewById(R.id.invitfriend).setVisibility(View.GONE);
+                        findViewById(R.id.tchat).setVisibility(View.GONE);
+                        findViewById(R.id.removefriend).setVisibility(View.GONE);
+                        break;
+                }
+            }
 
             @Override
             public void onError() {
